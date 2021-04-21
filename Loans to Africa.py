@@ -26,7 +26,20 @@ print(dataset.Year.unique())
 ##To see how many times a year appears in the dataset
 print(dataset['Year'].value_counts(2017))
 
+##To identify whether dataset is 'Series' or 'Dataframe'
+print(type(dataset))
 
+## list with specific columns relevant to data analysis
+list1 = ["Year", "Country", "USD (M)", "Interest Rate", "Libor Rate", "Term", "Sector"]
+print(dataset[list1].head(10))
+
+##Dropping columns that contain null values
+dropcolumns = dataset.dropna(axis=1)
+print(dataset.shape,dropcolumns.shape)
+
+##Replacing null columns with zero
+cleareddata = dataset.fillna(0)
+print(cleareddata.isnull().sum())
 
 
 
