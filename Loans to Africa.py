@@ -41,7 +41,27 @@ print(dataset.shape,dropcolumns.shape)
 cleareddata = dataset.fillna(0)
 print(cleareddata.isnull().sum())
 
+##Name of individual countries in the dataset
+print(dataset.Country.unique())
 
+##Summary Statistics
+Amount = dataset['USD (M)']
+print(Amount.sum())
+
+print(Amount.max())
+
+print(Amount.mean())
+
+print(Amount.median())
+
+## Visualisations (Seaborn scatterplot)
+sns.set_style('darkgrid')
+sns.relplot(data=dataset,x='USD (M)', y='Country')
+
+plt.title("Country vs Loan Amount")
+plt.xlabel("USD (M)")
+plt.ylabel("Country")
+plt.show()
 
 
 
