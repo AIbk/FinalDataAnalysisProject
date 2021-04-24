@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 dataset = pd.read_csv("ChinaLoansToAfrica.csv")
 
+dataset2 = pd.read_excel('African Countries GDP.xlsx')
+print(dataset2.shape)
+
 ##Missing values count
 print(dataset.isnull().sum())
 
@@ -37,12 +40,27 @@ print(dataset[list1].head(10))
 dropcolumns = dataset.dropna(axis=1)
 print(dataset.shape,dropcolumns.shape)
 
+##Dropping columns that contain null values in dataset2
+print(dataset2.shape,dropcolumns.shape)
+
+
 ##Replacing null columns with zero
 cleareddata = dataset.fillna(0)
 print(cleareddata.isnull().sum())
 
 ##Name of individual countries in the dataset
 print(dataset.Country.unique())
+
+
+## Sorting
+print(dataset2['Country'].sort_values())
+
+## Sorting for Countries with highest GDP
+print(dataset2.sort_values(by=['Nominal GDP ($billions)'], ascending=False))
+
+## Data Merging
+print(pd.merge(dataset,dataset2, on="Country"))
+
 
 ##Summary Statistics
 Amount = dataset['USD (M)']
@@ -63,7 +81,9 @@ plt.xlabel("USD (M)")
 plt.ylabel("Country")
 plt.show()
 
-
+## Visualisations 2 (Matplotlib)
+plt.scatter(x='Country', y='Interest Rate', Colour = 'Red')
+plt.show()
 
 
 
