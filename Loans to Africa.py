@@ -1,8 +1,13 @@
+from typing import Any, Union
+
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 import pandas as pd
+from pandas import DataFrame, Series
+from pandas.io.parsers import TextFileReader
+
 dataset = pd.read_csv("ChinaLoansToAfrica.csv")
 
 dataset2 = pd.read_excel('African Countries GDP.xlsx')
@@ -56,10 +61,15 @@ print(dataset.Country.unique())
 print(dataset2['Country'].sort_values())
 
 ## Sorting for Countries with highest GDP
-print(dataset2.sort_values(by=['Nominal GDP ($billions)'], ascending=False))
+SortbyGDP=(dataset2.sort_values(by=['Nominal GDP ($billions)'], ascending=False))
+print(SortbyGDP)
+
+##Top eleven countries by GDP
+print(SortbyGDP.head(11))
 
 ## Data Merging
-print(pd.merge(dataset,dataset2, on="Country"))
+Mergeddata = (pd.merge(dataset,dataset2, on="Country"))
+print(Mergeddata)
 
 
 ##Summary Statistics
@@ -72,18 +82,74 @@ print(Amount.mean())
 
 print(Amount.median())
 
+
+##Looping with 'Break' statement
+loans =[23787,388,77,43,2002,1108]
+for loans in loans:
+    if loans == 77:
+        print("I Found it!")
+        'Break'
+        print(loans)
+
+##Looping with 'Continue' statement
+loans =[23787,388,77,43,2002,1108]
+for loans in loans:
+    if loans == 77:
+        print("I Found it!")
+        'Continue'
+        print(loans)
+
+
+## Visualisation (Matplotlib)
+import matplotlib.pyplot as plt
+fig,ax = plt.subplots()
+
+##Merged Group
+GroupbyCountry = dataset.groupby('Country').sum('USD (M)')
+Mergedgroup=(pd.merge(GroupbyCountry, dataset2, on='Country'))
+print(Mergedgroup)
+Toploans =(Mergedgroup.sort_values(by=['USD (M)'], ascending=False))
+print(Toploans)
+
+##Top 5 by loans
+Topfivebyloans=(Toploans.head(5))
+print(Topfivebyloans)
+
+width = 0.4
+plt.bar(x=Topfivebyloans['Country'], height=Topfivebyloans['USD (M)'], color='blue', width=width, label='loans')
+plt.ylabel('USD (M)', fontsize=12)
+plt.xlabel('Country', fontsize=12)
+plt.title('Loan Amount by Country', fontsize=12)
+plt.legend()
+plt.show()
+
+plt.bar(x=Topfivebyloans['Country'], height=Topfivebyloans['Nominal GDP ($billions)'], color='Yellow', width=width, label='GDP')
+plt.ylabel('USD (billions)', fontsize=12)
+plt.xlabel('Country', fontsize=12)
+plt.title('GDP by Country', fontsize=12)
+plt.legend()
+plt.show()
+
+
+##Grouping
+GroupbyCountry = dataset.groupby('Country').sum('USD (M)')
+print(GroupbyCountry)
+
 ## Visualisations (Seaborn scatterplot)
 sns.set_style('darkgrid')
-sns.relplot(data=dataset,x='USD (M)', y='Country')
-
-plt.title("Country vs Loan Amount")
-plt.xlabel("USD (M)")
+sns.relplot(data=dataset,x='Interest Rate', y='Country')
+plt.title("Country vs Interest Rate")
+plt.xlabel("Interest Rate")
 plt.ylabel("Country")
 plt.show()
 
-## Visualisations 2 (Matplotlib)
-plt.scatter(x='Country', y='Interest Rate', Colour = 'Red')
-plt.show()
+
+
+
+
+
+
+
 
 
 
