@@ -1,12 +1,9 @@
-from typing import Any, Union
 
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 import pandas as pd
-from pandas import DataFrame, Series
-from pandas.io.parsers import TextFileReader
 
 dataset = pd.read_csv("ChinaLoansToAfrica.csv")
 
@@ -56,7 +53,6 @@ print(cleareddata.isnull().sum())
 ##Name of individual countries in the dataset
 print(dataset.Country.unique())
 
-
 ## Sorting
 print(dataset2['Country'].sort_values())
 
@@ -81,6 +77,15 @@ print(Amount.max())
 print(Amount.mean())
 
 print(Amount.median())
+
+
+##Numpy calculations
+import numpy as np
+print(np.sum(Amount))
+print(np.max(Amount))
+print(np.min(Amount))
+print(np.mean(Amount))
+
 
 
 ##Looping with 'Break' statement
@@ -134,6 +139,19 @@ plt.show()
 ##Grouping
 GroupbyCountry = dataset.groupby('Country').sum('USD (M)')
 print(GroupbyCountry)
+
+import matplotlib.pyplot as plt
+GroupbySector=dataset.groupby('Sector').sum('USD (M)')
+print(GroupbySector)
+Sector = ['Agriculture','Banking', 'Budget', 'Business','Defense', 'Education','Environment','Government','Health','ICT','Industry','Mining','Multisector','Other social','Power','Transport','Unallocated','Water']
+Amount = [288,2015,1650,815,1393,670,38,444,230,3661,1279,10133,2998,1069,18366,19219,642,3921]
+plt.subplots()
+plt.bar(x=Sector, height=Amount, color='Green',width=width, label='USD (M)')
+plt.xlabel('Sector')
+plt.ylabel('Amount')
+plt.title('Sector by Amount')
+plt.show()
+
 
 ## Visualisations (Seaborn scatterplot)
 sns.set_style('darkgrid')
