@@ -86,6 +86,9 @@ print(np.max(Amount))
 print(np.min(Amount))
 print(np.mean(Amount))
 
+##sorting with numpy
+a=np.array([2019,2017,2015,2016])
+print(np.sort(a))
 
 
 ##Looping with 'Break' statement
@@ -146,9 +149,9 @@ print(GroupbySector)
 Sector = ['Agriculture','Banking', 'Budget', 'Business','Defense', 'Education','Environment','Government','Health','ICT','Industry','Mining','Multisector','Other social','Power','Transport','Unallocated','Water']
 Amount = [288,2015,1650,815,1393,670,38,444,230,3661,1279,10133,2998,1069,18366,19219,642,3921]
 plt.subplots()
-plt.bar(x=Sector, height=Amount, color='Green',width=width, label='USD (M)')
-plt.xlabel('Sector')
+plt.bar(x=Sector, height=Amount,color='Green',width=width, label='USD (M)');
 plt.ylabel('Amount')
+plt.xlabel('Sector')
 plt.title('Sector by Amount')
 plt.show()
 
