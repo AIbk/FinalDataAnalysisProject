@@ -110,7 +110,7 @@ for loans in loans:
 
 ## Visualisation (Matplotlib)
 import matplotlib.pyplot as plt
-fig,ax = plt.subplots()
+plt.subplots()
 
 ##Merged Group
 GroupbyCountry = dataset.groupby('Country').sum('USD (M)')
